@@ -69,14 +69,14 @@ int main(){
             }
         }
 
-        for (int i = 0; i < userInput.length(); i++){
-            if (isalpha(userInput[i])){
+        for (int i = 0; i < userInput.length(); i++){ // Looping through the user input
+            if (isalpha(userInput[i])){ // If it is a letter
                 std::cout << (morseCodeChars[(int)toupper(userInput[i]) - 65]) << ' ';
-            } else if (isdigit(userInput[i])){
+            } else if (isdigit(userInput[i])){ // if it is a number
                 std::cout << (morseCodeChars[(int)userInput[i] - 22]) << ' ';
-            } else if (userInput[i] == ' '){
+            } else if (userInput[i] == ' '){ // if it's a space
                 std::cout << "    ";
-            } else {
+            } else { // if it's punctuation 
                 std::cout << "STOP";
             }
         }
