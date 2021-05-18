@@ -68,6 +68,42 @@ void printTextToMorse(std::string userInput){
     }
 }
 
+void printMorseToText(){
+    std::string userInput = "";
+    std::string textString = "";
+
+    std::cout << "Enter Morse Code to be converted:" << std::endl;
+    std::cout << "Enter one letter per line, hitting enter when the letter is complete\n" \
+                "Enter an s for the space, and STOP for the period\n" \
+                "Normal puctuation can be inputted as well, enter q to convert\n" << std::endl;
+
+    while (1){
+        std::cin >> userInput;
+        if (toupper(userInput[0]) == 'Q'){ // Quit
+            break;
+        } else if (toupper(userInput[0]) == 'S'){ // Space
+            textString += ' ';
+        } else if (userInput[0] != '-' && userInput[0] != '.'){ // Non morse code character
+            textString += userInput[0];
+        } else {
+            for (int i = 0; i < 36; i++){
+                if (userInput == morseCodeChars[i]){
+                    if (i <= 25){ // Letter
+                        textString += (char)(i + 65);
+                        break;
+                    } else if (i >= 26){ // Number
+                        textString += (char)(i + 22);
+                        break;
+                    }
+                }
+            }
+            //std::cout << "Invalid morse code character" << std::endl;
+        }
+    }
+    std::cout << "The converted string is: " << std::endl;
+    std::cout << textString << std::endl;
+}
+
 int main(){
     char userChoice;
     std::string userInput = "";
@@ -86,37 +122,7 @@ int main(){
         printTextToMorse(userInput);
 
     } else if (userChoice == '2'){ // Morse to text
-        std::string textString = "";
-        std::cout << "Enter Morse Code to be converted:" << std::endl;
-        std::cout << "Enter one letter per line, hitting enter when the letter is complete\n" \
-                    "Enter an s for the space, and STOP for the period\n" \
-                    "Normal puctuation can be inputted as well, enter q to convert\n" << std::endl;
-
-        while (1){
-            std::cin >> userInput;
-            if (toupper(userInput[0]) == 'Q'){ // Quit
-                break;
-            } else if (toupper(userInput[0]) == 'S'){ // Space
-                textString += ' ';
-            } else if (userInput[0] != '-' && userInput[0] != '.'){ // Non morse code character
-                textString += userInput[0];
-            } else {
-                for (int i = 0; i < 36; i++){
-                    if (userInput == morseCodeChars[i]){
-                        if (i <= 25){ // Letter
-                            textString += (char)(i + 65);
-                            break;
-                        } else if (i >= 26){ // Number
-                            textString += (char)(i + 22);
-                            break;
-                        }
-                    }
-                }
-                //std::cout << "Invalid morse code character" << std::endl;
-            }
-        }
-        std::cout << "The converted string is: " << std::endl;
-        std::cout << textString << std::endl;
+        printMorseToText();
     } else {
         std::cout << "Invalid option. Please Try again." << std::endl;
     }
